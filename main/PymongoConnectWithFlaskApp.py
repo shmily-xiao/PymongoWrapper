@@ -22,44 +22,47 @@ class PymongoConnectWithFlaskApp(object):
     dbName = ''
 
     def __init__(self, app):
-        if app.config['MONGO_HOST'] is not None:
+        if app.config.get('MONGO_HOST') is not None:
             self.host = app.config['MONGO_HOST']
 
-        if app.config['MONGO_PORT'] is not None:
+        if app.config.get('MONGO_PORT') is not None:
             self.port = app.config['MONGO_PORT']
 
-        if app.config['MONGO_CONNECT'] is not None:
+        if app.config.get('MONGO_CONNECT') is not None:
             self.connect = app.config['MONGO_CONNECT']
 
-        if app.config['MONGO_DBNAME'] is not None:
+        if app.config.get('MONGO_DBNAME') is not None:
             self.dbName = app.config['MONGO_DBNAME']
 
-        if app.config['MONGO_USERNAME'] is not None:
+        if app.config.get('MONGO_USERNAME') is not None:
             self.kwargs['username'] = app.config['MONGO_USERNAME']
 
-        if app.config['MONGO_PASSWORD'] is not None:
+        if app.config.get('MONGO_PASSWORD') is not None:
             self.kwargs['password'] = app.config['MONGO_PASSWORD']
 
-        if app.config['MONGO_MAX_POOL_SIZE'] is not None:
+        if app.config.get('MONGO_MAX_POOL_SIZE') is not None:
             self.kwargs['maxPoolSize'] = app.config['MONGO_MAX_POOL_SIZE']
 
-        if app.config['MONGO_MIN_POOL_SIZE'] is not None:
+        if app.config.get('MONGO_MIN_POOL_SIZE') is not None:
             self.kwargs['minPoolSize'] = app.config['MONGO_MIN_POOL_SIZE']
 
-        if app.config['MONGO_MAX_IDLE_TIME_MS'] is not None:
+        if app.config.get('MONGO_MAX_IDLE_TIME_MS') is not None:
             self.kwargs['maxIdleTimeMS'] = app.config['MONGO_MAX_IDLE_TIME_MS']
 
-        if app.config['MONGO_SOCKET_TIMEOUT_MS'] is not None:
+        if app.config.get('MONGO_SOCKET_TIMEOUT_MS') is not None:
             self.kwargs['socketTimeoutMS'] = app.config['MONGO_SOCKET_TIMEOUT_MS']
 
-        if app.config['MONGO_CONNECT_TIMEOUT_MS'] is not None:
+        if app.config.get('MONGO_CONNECT_TIMEOUT_MS') is not None:
             self.kwargs['connectTimeoutMS'] = app.config['MONGO_CONNECT_TIMEOUT_MS']
 
-        if app.config['MONGO_SOCKET_KEEP_ALIVE'] is not None:
+        if app.config.get('MONGO_SOCKET_KEEP_ALIVE') is not None:
             self.kwargs['socketKeepAlive'] = app.config['MONGO_SOCKET_KEEP_ALIVE']
 
-        if app.config['MONGO_REPLICA_SET'] is not None:
+        if app.config.get('MONGO_REPLICA_SET') is not None:
             self.kwargs['replicaSet'] = app.config['MONGO_REPLICA_SET']
+
+        if app.config.get('MONGO_READ_PREFERENCE') is not None:
+            self.kwargs['read_preference'] = app.config['MONGO_READ_PREFERENCE']
 
     def getConnect(self):
         return MongoClient(host=self.host,port=self.port,document_class=dict,
