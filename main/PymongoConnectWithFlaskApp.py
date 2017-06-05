@@ -61,7 +61,7 @@ class PymongoConnectWithFlaskApp(object):
     # PRIMARY （默认 只读主库），PRIMARY_PREFERRED（主库优先），
     # SECONDARY（只读从库），SECONDARY_PREFERRED（从库优先），NEAREST（就近优先）[注意都用小写]
     # 详情查看 pymongo.read_preferences 
-    # (read_preferences)
+    # (readPreference)
     MONGO_READ_PREFERENCE
     """
     kwargs = {}
@@ -113,7 +113,7 @@ class PymongoConnectWithFlaskApp(object):
             self.kwargs['replicaSet'] = app.config['MONGO_REPLICA_SET']
 
         if app.config.get('MONGO_READ_PREFERENCE') is not None:
-            self.kwargs['read_preference'] = app.config['MONGO_READ_PREFERENCE']
+            self.kwargs['readPreference'] = app.config['MONGO_READ_PREFERENCE']
 
     def getConnect(self):
         return MongoClient(host=self.getHost(),port=self.port,document_class=dict,
